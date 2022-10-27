@@ -9,10 +9,10 @@ test('toolTips', () => {
   const btn2 = document.querySelector('#btn_2');
   const tipsBlock = new Tooltip();
   btn1.addEventListener('click', (evt) => {
-    tipsBlock.showTooltip(tipsBlock.messages[0], evt.currentTarget);
+    Tooltip.showTooltip(tipsBlock.messages[0], evt.currentTarget);
   });
   btn2.addEventListener('click', (evt) => {
-    tipsBlock.showTooltip(tipsBlock.messages[1], evt.currentTarget);
+    Tooltip.showTooltip(tipsBlock.messages[1], evt.currentTarget);
   });
 
   btn1.click();

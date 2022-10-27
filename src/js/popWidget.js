@@ -17,19 +17,20 @@ export default class Tooltip {
     ];
   }
 
-  showTooltip(message, element) {
+  static showTooltip(message, element) {
     if (!element.dataset.id) {
-      const tooltipElem = this.createTip(message);
+      const tooltipElem = Tooltip.createTip(message);
       const id = performance.now();
-      element.dataset.id = id;
+      const elem = element;
+      elem.dataset.id = id;
       tooltipElem.dataset.id = id;
-      this.setTipPosition(element, tooltipElem);
+      Tooltip.setTipPosition(elem, tooltipElem);
     } else {
-      this.removeTip(element);
+      Tooltip.removeTip(element);
     }
   }
 
-  createTip(message) {
+  static createTip(message) {
     // create tooltip:
     const tooltipElem = document.createElement('div');
     tooltipElem.classList.add('tip-active');
@@ -41,15 +42,17 @@ export default class Tooltip {
     return tooltipElem;
   }
 
-  removeTip(element) {
+  static removeTip(element) {
     const tips = Array.from(document.querySelectorAll('.tip-active'));
     const activeTip = tips.find((t) => t.dataset.id === element.dataset.id);
     activeTip.remove();
-    delete element.dataset.id;
+    const elem = element;
+    delete elem.dataset.id;
   }
 
-  setTipPosition(element, tipEl) {
-    tipEl.style.top = `${element.offsetTop - tipEl.offsetHeight - 10}px`;
-    tipEl.style.left = `${element.offsetLeft + element.offsetWidth / 2 - tipEl.offsetWidth / 2}px`;
+  static setTipPosition(element, tipEl) {
+    const tipElem = tipEl;
+    tipElem.style.top = `${element.offsetTop - tipEl.offsetHeight - 10}px`;
+    tipElem.style.left = `${element.offsetLeft + element.offsetWidth / 2 - tipEl.offsetWidth / 2}px`;
   }
 }
